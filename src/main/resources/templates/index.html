@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--360浏览器优先以webkit内核解析-->
+    <title>东信银星设备更新包管理系统</title>
+    <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link href="../static/css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" rel="stylesheet"/>
+    <link href="../static/css/main/animate.min.css" th:href="@{/css/main/animate.min.css}" rel="stylesheet"/>
+    <link href="../static/css/main/style.min862f.css" th:href="@{/css/main/style.min862f.css}" rel="stylesheet"/>
+</head>
+
+<body class="white-bg text-primary">
+<div class="wrapper white-bg">
+    <div class="col-sm-12  ">
+        <div class="col-sm-12">
+            <h2 class="font-bold">东信银星设备更新包管理系统</h2>
+            <p>
+                <b>当前版本：</b><span>1.0.0</span>
+            </p>
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>使用说明</h5>
+                </div>
+                <div class="ibox-content">
+                    <p><i class="fa fa-send-o"></i> 1.更新包命名个格式需要为版本号命名,例如：1.0.1.exe</a>
+                    </p>
+                    <p><i class="fa fa-send-o"></i> 2.更新包应为上一代更新包的增加数字版本,避免内部文件产生错误 </a>
+                    </p>
+                    <p><i class="fa fa-send-o"></i> 3.上传更新包失败请检查更新包命名个数是否有问题</a>
+                    </p>
+                    <p><i class="fa fa-send-o"></i> 4.暂时更新包系统只适用于全省的更新包更换，目前不支持分地区更换更新</a>
+                    </p>
+                    <p><i class="fa fa-send-o"></i> 5.暂时更新包不支持退档，如需退档，需要联系管理员将config.xml的文件内内的版本号和地址 </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+<!--        <div class="col-sm-6">-->
+<!--            <h4>获取设备日志</h4>-->
+<!--            <div class="columns pull-right">-->
+<!--                <button class="btn btn-success" onclick="DevLog()">查询</button>-->
+<!--            </div>-->
+<!--            <div class="columns pull-left col-md-4 nopadding">-->
+<!--                <input id="devId" type="text" class="form-control"-->
+<!--                       placeholder="设备编号">-->
+<!--            </div>-->
+<!--            <table id="log" class="table">-->
+<!--                <thead>-->
+<!--                <tr>-->
+<!--                    <th>日志名</th>-->
+<!--                    <th>下载</th>-->
+<!--                </tr>-->
+<!--                </thead>-->
+<!--                <tbody id="logBady">-->
+
+<!--                </tbody>-->
+<!--            </table>-->
+
+<!--        </div>-->
+    </div>
+    <div class="col-sm-12">
+        <div class="col-sm-12">
+            <div class="ibox-content">
+                <div class="form-group">
+                    <h3>上传的设备更新包</h3>
+                    <div class="input-group">
+                        <span class=" btn btn-white btn-file"><input type="file" id="file" name="myfile" /></span>
+                        <a href="/" class="btn btn-danger fileinput-exists" data-dismiss="fileinput">清除</a>
+                    </div>
+                    <div class="input-group">
+                        <h4> </h4>
+                    </div>
+                    <button class="btn btn-success" id="update" onclick="UpladFile()">确定上传</button>
+                </div>
+            </div>
+
+        </div>
+<!--        <div class="col-sm-6">-->
+<!--            <div class="ibox-content">-->
+<!--                <div class="form-group">-->
+<!--                    <h3>上传的设备日志</h3>-->
+<!--                    <div class="input-group">-->
+<!--                        <span class=" btn btn-white btn-file"><input type="file" id="file1" name="myfile" /></span>-->
+<!--                        <a href="/" class="btn btn-danger fileinput-exists" data-dismiss="fileinput">清除</a>-->
+<!--                    </div>-->
+<!--                    <div class="input-group">-->
+<!--                        <label class="col-sm-4 control-label">设备编号：</label>-->
+<!--                        <div class="col-sm-8">-->
+<!--                            <input name="deviceId"  id="deviceId" class="form-control" type="text">-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <button class="btn btn-success" id="uploadLog" onclick="uploadLog()">确定上传</button>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--        </div>-->
+    </div>
+
+</div>
+
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/ajax/libs/layer/layer.min.js}"></script>
+<script type="text/javascript">
+    $(function() {
+        DevLog() ;
+    });
+    function DevLog() {
+        let devId=document.getElementById("devId").value;
+        // let devId="440000";
+        console.log(devId)
+        if(devId ==undefined || devId =="" || devId ==null){
+            return;
+        }
+        let formData = new FormData();
+        formData.append("devId",devId);
+        $.ajax({
+            url: '/getDevLogList',
+            dataType: "json",
+            type: "post",
+            data: formData,
+            processData: false,//不去处理发送的数据
+            contentType: false,//不去设置Content-Type请求头
+            success: function (res) {
+                if(res.code>0)
+                    console.log(res)
+                let date=res.date;
+                console.log(date);
+                let html_resultinfo
+                for(let i=0;i<date.length;i++){
+                    html_resultinfo += '<tr><th>' + date[i].logName + '</th>' +
+                        '<th><a href=" ' + date[i].url+ '"</a>下载</th>'+'</tr>'
+                    console.log(html_resultinfo)
+                }
+                $('#logBady').append(html_resultinfo);
+                alert("查询成功");
+                if(res.code<0)
+                    alert("查询失败"+res.msg);
+                return;
+            },
+            error: function (res) {
+                alert("查询失败");
+                return;
+            }
+        })
+    }
+
+    //上传文件方法
+    function uploadLog() {
+        let formData = new FormData();
+        let fileObj = document.getElementById("file1").files[0]; // js 获取文件对象
+        let devId = document.getElementById("deviceId").value;         //获取设备编号
+        if(devId ==undefined || devId =="" || devId ==null){
+            alert("设备编号未填");
+            return;
+        }
+        if(fileObj ==undefined || fileObj =="" || fileObj ==null){
+            alert("未选择上传文件");
+            return;
+        }
+        console.log("file:"+fileObj);
+        formData.append("file",fileObj);  //上传一个files对象
+        formData.append("devId",devId);
+        console.log(formData);
+        $.ajax({//jQuery方法，此处可以换成其它请求方式
+            url: '/uploadLog',
+            dataType: "json",
+            type: "post",
+            data: formData,
+            processData: false,//不去处理发送的数据
+            contentType: false,//不去设置Content-Type请求头
+            success: function (res) {
+                if(res.code>0)
+                    alert("上传成功");
+                if(res.code<0)
+                    alert("上传失败"+res.msg);
+                return;
+            },
+            error: function (res) {
+                alert("上传失败");
+                return;
+            }
+        })
+    }
+
+    //上传文件方法
+    function UpladFile() {
+        let formData = new FormData();
+        let fileObj = document.getElementById("file").files[0]; // js 获取文件对象
+        if(fileObj ==undefined || fileObj =="" || fileObj ==null){
+            alert("未选择上传文件");
+            return;
+        }
+        console.log("file:"+fileObj);
+        formData.append("file",fileObj);  //上传一个files对象
+        console.log(formData);
+        $.ajax({//jQuery方法，此处可以换成其它请求方式
+            url: '/upload',
+            dataType: "json",
+            type: "post",
+            data: formData,
+            processData: false,//不去处理发送的数据
+            contentType: false,//不去设置Content-Type请求头
+            success: function (res) {
+                if(res.code>0)
+                    alert("上传成功");
+                if(res.code<0)
+                    alert("上传失败"+res.msg);
+                return;
+            },
+            error: function (res) {
+                alert("上传失败");
+                return;
+            }
+        })
+    }
+
+</script>
+</body>
+</html>

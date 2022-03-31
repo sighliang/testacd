@@ -1,0 +1,135 @@
+serverIp: 127.0.0.1
+serverPort: 7001
+city:
+  A_440000:
+    cityCode: 440000
+    name: 广东全省
+    version: 1.0.0
+    packageName: 1.0.0.exe
+    url: D:/home/weblogic/yxjrApp/upgrade/1.0.0.exe
+  A_440100:
+    cityCode: 440100
+    name: 广州
+    version: 1.0.0
+    packageName: 1.0.0.exe
+    url: D:/upload/1.0.0.exe
+  A_440200:
+    cityCode: 440200
+    name: 韶关
+    version: 1.0.0
+    packageName: 1.0.0.exe
+    url: D:/upload/1.0.0.exe
+  A_440300:
+    cityCode: 440300
+    name: 深圳
+    version: 1.0.0
+    packageName: 1.0.0.exe
+    url: D:/upload/1.0.0.exe
+  A_440400:
+    cityCode: 440400
+    name: 珠海
+    version: 1.0.0
+    packageName: 1.0.0.exe
+    url: D:/upload/1.0.0.exe
+  A_440500:
+    cityCode: 442000
+    name: 中山
+    version: 1.0.0
+    packageName: 1.0.0.exe
+    url: D:/upload/1.0.0.exe
+  A_440600:
+    cityCode: 440600
+    name: 佛山
+    version: 1.0.0
+    packageName: 1.0.0.exe
+    url: D:/upload/1.0.0.exe
+  A_440700:
+    cityCode: 440700
+    name: 江门
+    version: 1.0.0
+    packageName: null
+    url: null
+  A_440800:
+    cityCode: 440800
+    name: 湛江
+    version: 1.0.0
+    packageName: null
+    url: null
+  A_440900:
+    cityCode: 440900
+    name: 茂名
+    version: 1.0.0
+    packageName: null
+    url: null
+  A_441200:
+    cityCode: 441200
+    name: 肇庆
+    version: 1.0.0
+    packageName: null
+    url: null
+  A_441300:
+    cityCode: 441300
+    name: 惠州
+    version: 1.0.0
+    packageName: null
+    url: null
+  A_441400:
+    cityCode: 441400
+    name: 梅州
+    version: 1.0.0
+    packageName: null
+    url: null
+  A_441500:
+    cityCode: 441500
+    name: 汕尾
+    version: 1.0.0
+    packageName: null
+    url: null
+  A_441600:
+    cityCode: 441600
+    name: 河源
+    version: 1.0.0
+    packageName: null
+    url: null
+  A_441700:
+    cityCode: 441700
+    name: 阳江
+    version: 1.0.0
+    packageName: null
+    url: null
+  A_441800:
+    cityCode: 441800
+    name: 清远
+    version: 1.0.0
+    packageName: null
+    url: null
+  A_441900:
+    cityCode: 441900
+    name: 东莞
+    version: 1.0.0
+    packageName: null
+    url: null
+  A_442000:
+    cityCode: 442000
+    name: 中山
+    version: 1.0.0
+    packageName: null
+    url: null
+  A_445100:
+    cityCode: 445100
+    name: 潮州
+    version: 1.0.0
+    packageName: null
+    url: null
+  A_445200:
+    cityCode: 445200
+    name: 揭阳
+    version: 1.0.0
+    packageName: null
+    url: null
+  A_445300:
+    cityCode: 445300
+    name: 云浮
+    version: 1.0.0
+    packageName: null
+    url: null
